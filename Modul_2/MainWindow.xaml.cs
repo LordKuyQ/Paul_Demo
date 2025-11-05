@@ -1,44 +1,67 @@
-﻿using Modul_2.Models;
+﻿
 using Modul_2.ViewControllers;
 using System.Windows;
 using System.Windows.Controls;
+using Modul_2.Models;
 
 namespace Modul_2
 {
     public partial class MainWindow : Window
     {
+        private readonly Database _context;
         public MainWindow()
         {
             InitializeComponent();
-
-            DrawProduct(AppContext.Products);
+            _context = new Database();
+            LoadEquip();
         }
-        public void DrawProduct(List<Product> products)
+        private void LoadEquip()
         {
-            BoxProducts.ItemsSource = AppContext.Products.Select(p => new ProductItemController(p));
-            
-            //BoxProducts.Items.Clear();
-            //foreach (var item in products)
-            //{
-            //    ProductItemController itemController = new ProductItemController(item);
-
-            //    BoxProducts.Items.Add(itemController);
-            //}
+            try
+            {
+                using (var context = new Database())
+                {
+                    BoxProducts.ItemsSource = context.Products
+                            .Select(e => new ProductItemController(e))
+                            .ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Load error: {ex.Message}");
+            }
         }
 
-        private void BoxProducts_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        private void BoxProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ListBox listBox = sender as ListBox;
-            //ProductItemController item = (ProductItemController)listBox.SelectedItem;
-            if(listBox.SelectedItem is not ProductItemController item)
+            if (sender is not ListBox listBox || listBox.SelectedItem is not ProductItemController item)
             {
                 return;
             }
-            Product selectedProduct = item.DataContext as Product;
+            if (item.DataContext is not Product selectedProduct)
+            {
+                return;
+            }
 
-            selectedProduct.Discount += 10;
+            try
+            {
+                using (var context = new Database())
+                {
+                    var productToUpdate = context.Products.Find(selectedProduct.Id);
+                    if (productToUpdate != null)
+                    {
+                        productToUpdate.Discount += 10;
+                        context.SaveChanges();
+                        _context.Entry(selectedProduct).Reload();
+                    }
+                }
 
-            DrawProduct(AppContext.Products);
+                listBox.Items.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Upd error: {ex.Message}");
+            }
         }
     }
 }

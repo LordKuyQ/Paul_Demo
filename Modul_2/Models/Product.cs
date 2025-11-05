@@ -1,34 +1,41 @@
-﻿namespace Modul_2.Models
+﻿using System;
+using System.Collections.Generic;
+
+namespace Modul_2.Models;
+
+public partial class Product
 {
-    public class Product
-    {
-        public int Id { get; set; }
-        /// <summary>
-        /// Артикул
-        /// </summary>
-        public string SKU { get; set; } = string.Empty;
-        public string Name { get; set; } = string.Empty;
-        /// <summary>
-        /// единица измерения
-        /// </summary>
-        public string Unit { get; set; } = string.Empty;
-        public double Price { get; set; } = 0.0;
-        /// <summary>
-        /// поставщик
-        /// </summary>
-        public string Supplier { get; set; } = string.Empty;
-        /// <summary>
-        /// Производитель
-        /// </summary>
-        public string Manufacturer { get; set; } = string.Empty;
-        public string Сategory { get; set; } = string.Empty;
-        public int Discount { get; set; } = 0;
-        public int Count { get; set; } = 0;
-        public string Description { get; set; } = string.Empty;
-        public string ImagePath { get; set; } = @"../Images/Dafaults/picture.png";
-        public override string ToString()
-        {
-            return $"{Id} - {Name} - {Price}";
-        }
-    }
+    public int Id { get; set; }
+
+    public string? Articul { get; set; }
+
+    public int IdTypeProduct { get; set; }
+
+    public string? UnitMeasure { get; set; }
+
+    public double Cost { get; set; }
+
+    public int IdProvider { get; set; }
+
+    public int IdProducer { get; set; }
+
+    public int IdCategoryProduct { get; set; }
+
+    public int? Discount { get; set; }
+
+    public int? CountOnStorage { get; set; }
+
+    public string? Description { get; set; }
+
+    public string? Photo { get; set; }
+
+    public virtual ICollection<FkOrderProduct> FkOrderProducts { get; set; } = new List<FkOrderProduct>();
+
+    public virtual CategoryProduct IdCategoryProductNavigation { get; set; } = null!;
+
+    public virtual Producer IdProducerNavigation { get; set; } = null!;
+
+    public virtual Provider IdProviderNavigation { get; set; } = null!;
+
+    public virtual TypeProduct IdTypeProductNavigation { get; set; } = null!;
 }
