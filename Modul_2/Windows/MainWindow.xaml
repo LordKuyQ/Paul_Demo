@@ -15,7 +15,9 @@
             <Button Content="Выход" Click="ExitButton" Margin="5"/>
             <Grid/>
         </DockPanel>
-        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top"
+                    Name="PanelFind"
+                    Visibility="Collapsed">
             <TextBlock Name="BoxSearch" Width="150"/>
             <Label Content="Поиск"/>
             
@@ -29,11 +31,14 @@
             </ComboBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" DockPanel.Dock="Bottom">
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal"
+                        Name="PanelCRUD"
+                        Visibility="Collapsed">
                 <Button Name="AddProductButton" Content="Добавить товар" Click="AddProductButtonClick"/>
                 <Button Name="DelProductButton" Content="Удалить товар" Click="DelProductButtonClick"/>
             </StackPanel>
-            <Button Name="OpenOrdersButton" Content="Список заказов" Click="OpenOrdersButtonClick"/>
+            <Button Name="OpenOrdersButton" Content="Список заказов" Click="OpenOrdersButtonClick"
+                    Visibility="Collapsed"/>
         </StackPanel>
         <StackPanel>
             <ListBox Name="BoxProducts"

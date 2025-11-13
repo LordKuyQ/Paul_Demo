@@ -16,6 +16,7 @@ namespace Modul_2
             if (user != null) 
             {
                 RunUserName.Text = user.Fio;
+
             }
             else
             {
