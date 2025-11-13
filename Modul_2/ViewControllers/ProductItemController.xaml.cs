@@ -15,7 +15,7 @@ namespace Modul_2.ViewControllers
 
             if (product.Discount > 15)
             {
-                BoxDiscont.Background = new BrushConverter().ConvertFrom("#2E8B57") as SolidColorBrush;
+                BoxDiscont.Foreground = new BrushConverter().ConvertFrom("#2E8B57") as SolidColorBrush;
             }
             if (product.Discount > 0)
             {

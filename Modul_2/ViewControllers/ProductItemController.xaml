@@ -56,11 +56,14 @@
                 </TextBlock>
             </StackPanel>
             <!--Правый компонент-->
-            <Grid Name="BoxDiscont" Grid.Column="2">
-                <TextBlock Text="{Binding Discount}"
+            <Grid Grid.Column="2">
+                <TextBlock Name="BoxDiscont"
                        FontSize="30"
                        HorizontalAlignment="Center" 
-                       VerticalAlignment="Center"/>
+                       VerticalAlignment="Center">
+                    <Run Text="{Binding Discount}"></Run>
+                    <Run>%</Run>
+                </TextBlock>
             </Grid>
         </Grid>
     </Border>

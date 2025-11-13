@@ -9,10 +9,18 @@ namespace Modul_2
     public partial class MainWindow : Window
     {
         private readonly Database _context;
-        public MainWindow()
+        public MainWindow(User user = null)
         {
             InitializeComponent();
             _context = new Database();
+            if (user != null) 
+            {
+                RunUserName.Text = user.Fio;
+            }
+            else
+            {
+                RunUserName.Text = "гость";
+            }
             LoadEquip();
         }
         private void LoadEquip()
@@ -62,6 +70,26 @@ namespace Modul_2
             {
                 MessageBox.Show($"Upd error: {ex.Message}");
             }
+        }
+
+        private void ExitButton(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void AddProductButtonClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DelProductButtonClick(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void OpenOrdersButtonClick(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

@@ -40,8 +40,8 @@ public partial class Database : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         string connect = "Server=UGLYBASTARD\\SQLEXPRESS;Database=paul;Trusted_Connection=True; TrustServerCertificate=True";
-        string connect_vki = "Server=dbsrv\\ag2024;Database=   ;Trusted_Connection=True; TrustServerCertificate=True";
-        optionsBuilder.UseSqlServer(connect);
+        string connect_vki = "Server=dbsrv\\ag2024;Database=NDA_paul_basa_06_11;Trusted_Connection=True; TrustServerCertificate=True";
+        optionsBuilder.UseSqlServer(connect_vki);
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
