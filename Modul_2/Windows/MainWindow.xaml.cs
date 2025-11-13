@@ -65,38 +65,6 @@ namespace Modul_2
             }
         }
 
-        private void BoxProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (sender is not ListBox listBox || listBox.SelectedItem is not ProductItemController item)
-            {
-                return;
-            }
-            if (item.DataContext is not Product selectedProduct)
-            {
-                return;
-            }
-
-            try
-            {
-                using (var context = new Database())
-                {
-                    var productToUpdate = context.Products.Find(selectedProduct.Id);
-                    if (productToUpdate != null)
-                    {
-                        productToUpdate.Discount += 10;
-                        context.SaveChanges();
-                        _context.Entry(selectedProduct).Reload();
-                    }
-                }
-
-                listBox.Items.Refresh();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Upd error: {ex.Message}");
-            }
-        }
-
         private void ExitButton(object sender, RoutedEventArgs e)
         {
             Authorization authwindow = new Authorization();

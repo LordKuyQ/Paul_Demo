@@ -42,7 +42,6 @@
         </StackPanel>
         <StackPanel>
             <ListBox Name="BoxProducts"
-                     SelectionChanged="BoxProducts_SelectionChanged"
                      Height="650"/>
         </StackPanel>
     </DockPanel>
