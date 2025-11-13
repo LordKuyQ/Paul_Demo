@@ -16,7 +16,31 @@ namespace Modul_2
             if (user != null) 
             {
                 RunUserName.Text = user.Fio;
-
+                switch (user.IdRoleNavigation.Role1) 
+                {
+                    case "Авторизированный клиент":
+                        {
+                            break;
+                        }
+                    case "Менеджер":
+                        {
+                            PanelFind.Visibility = Visibility.Visible;
+                            OpenOrdersButton.Visibility = Visibility.Visible;
+                            break;
+                        }
+                    case "Администратор":
+                        {
+                            PanelFind.Visibility = Visibility.Visible;
+                            PanelCRUD.Visibility = Visibility.Visible;
+                            OpenOrdersButton.Visibility = Visibility.Visible;
+                            BoxProducts.MouseDoubleClick += MouseDoubleEditProduct;
+                            break;
+                        }
+                    default:
+                        {
+                            break;
+                        }
+                }
             }
             else
             {
@@ -75,6 +99,8 @@ namespace Modul_2
 
         private void ExitButton(object sender, RoutedEventArgs e)
         {
+            Authorization authwindow = new Authorization();
+            authwindow.Show();
             this.Close();
         }
 
@@ -91,6 +117,36 @@ namespace Modul_2
         private void OpenOrdersButtonClick(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void MouseDoubleEditProduct(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (sender is not ListBox listBox || listBox.SelectedItem is not ProductItemController item)
+            {
+                return;
+            }
+            if (item.DataContext is not Product selectedProduct)
+            {
+                return;
+            }
+
+            try
+            {
+                using (var context = new Database())
+                {
+                    var productToUpdate = context.Products.Find(selectedProduct.Id);
+                    if (productToUpdate != null)
+                    {
+                        MessageBox.Show(selectedProduct.ToString());
+                    }
+                }
+
+                listBox.Items.Refresh();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Upd error: {ex.Message}");
+            }
         }
     }
 }

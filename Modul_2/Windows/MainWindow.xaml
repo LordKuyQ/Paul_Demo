@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Modul_2"
         mc:Ignorable="d"
-        Title="Главное окно" Height="750" Width="1500" FontSize="20">
+        Title="Главное окно" Height="780" Width="1500" FontSize="20">
     <DockPanel>
         <DockPanel DockPanel.Dock="Top">
             <TextBlock  DockPanel.Dock="Right" Margin="5">
