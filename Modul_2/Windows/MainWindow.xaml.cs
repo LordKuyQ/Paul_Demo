@@ -1,14 +1,18 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
+using Modul_2.Models;
 using Modul_2.ViewControllers;
+using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using Modul_2.Models;
 
 namespace Modul_2
 {
     public partial class MainWindow : Window
     {
         private readonly Database _context;
+
+        private ObservableCollection<ProductItemController> Products;
         public MainWindow(User user = null)
         {
             InitializeComponent();
@@ -54,9 +58,27 @@ namespace Modul_2
             {
                 using (var context = new Database())
                 {
-                    BoxProducts.ItemsSource = context.Products
-                            .Select(e => new ProductItemController(e))
-                            .ToList();
+
+
+
+
+
+
+
+
+
+
+                    var items = context.Products
+                        .Include(e => e.IdProducerNavigation)
+                        .Include(e => e.IdProviderNavigation)
+                        .Include(e => e.IdCategoryProductNavigation)
+                        .Include(e => e.IdTypeProductNavigation)
+                        .ToList();
+
+                    Products = new ObservableCollection<ProductItemController>(
+                        items.Select(e => new ProductItemController(e))
+                    );
+                    BoxProducts.ItemsSource = Products;
                 }
             }
             catch (Exception ex)

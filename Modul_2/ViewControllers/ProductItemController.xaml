@@ -25,7 +25,7 @@
             <!--Центральный компонент-->
             <StackPanel Grid.Column="1">
                 <TextBlock FontWeight="Bold">
-                <Run Text="{Binding Сategory}"/>
+                <Run Text="{Binding CategoryName}"/>
                 <Run Text=" | "/>
                 <Run Text="{Binding Name}"/>
                 </TextBlock>
@@ -35,11 +35,11 @@
                 </TextBlock>
                 <TextBlock>
                 <Run Text="Производитель: "/>
-                <Run Text="{Binding Manufacturer}"/>
+                <Run Text="{Binding ProviderName}"/>
                 </TextBlock>
                 <TextBlock>
                 <Run Text="Поставщик: "/>
-                <Run Text="{Binding Supplier}"/>
+                <Run Text="{Binding ProducerName}"/>
                 </TextBlock>
                 <TextBlock>
                     <Run Text="Цена: "/>
